@@ -44,19 +44,19 @@ jobs:
             cp -rT ../frontend/build ./public
 
       - persist_to_workspace:
-          root: backend
+          root: .
           paths:
-            - public
+            - backend/public
 
   deploiement:
     machine: true
     steps:
       - attach_workspace:
-          at: /workspace
+          at: .
 
       - run:
           command: |
-            cd /workspace/backend
+            cd /backend
             ls -Rl
 
 workflows:
