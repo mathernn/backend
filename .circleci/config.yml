@@ -1,0 +1,71 @@
+version: 2.1
+
+jobs:
+  checkout_and_unit_test:
+    machine: true
+    steps:
+      - run: echo "Checkout_and_Unit tests passed"
+  deploy_backend:
+    machine: true
+    steps:
+      - run: echo "Deploy backend passed"
+  integration_tests_backend:
+    machine: true
+    steps:
+      - run: echo "Integration_tests_backend passed"
+  deploy_staging:
+    machine: true
+    steps:
+      - run: echo "deploy_staging passed"
+  acceptance_test_1:
+    machine: true
+    steps:
+      - run: echo "acceptance_test_2 passed"     
+  acceptance_test_2:
+    machine: true
+    steps:
+      - run: echo "acceptance_test_2 passed"    
+  acceptance_test_3:
+    machine: true
+    steps:
+      - run: echo "acceptance_test_3 passed"   
+  acceptance_test_4:
+    machine: true
+    steps:
+      - run: echo "acceptance_test_4 passed"   
+  deploy_production:
+    machine: true
+    steps:
+      - run: echo "deploy prod passed"   
+
+workflows:
+  build:
+    jobs:
+      - checkout_and_unit_test
+      - deploy_backend:
+          requires:
+            - checkout_and_unit_test
+      - integration_tests_backend:
+          requires:
+            - deploy_backend
+      - deploy_staging:
+          requires:
+            - integration_tests_backend
+      - acceptance_test_1:
+          requires:
+            - deploy_staging
+      - acceptance_test_2:
+          requires:
+            - deploy_staging
+      - acceptance_test_3:
+          requires:
+            - deploy_staging
+      - acceptance_test_4:
+          requires:
+            - deploy_staging
+      - deploy_production:
+          requires:
+            - acceptance_test_1
+            - acceptance_test_2
+            - acceptance_test_3
+            - acceptance_test_4
