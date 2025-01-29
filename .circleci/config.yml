@@ -1,44 +1,65 @@
 version: 2.1
 orbs:
   node: circleci/node@5
+
 jobs:
   checkoutEtTests:
     machine: true
     steps:
-      - run: git clone https://github.com/mathernn/backend.git
-      - run:       
-            command: |
-                    cd backend
-                    npm install 
-      - run: 
-            command: |
-                    cd backend
-                    npm test domain.test.js
+      - run:
+          command: git clone https://github.com/mathernn/backend.git
+      - run:
+          command: |
+            cd backend
+            npm install 
+      - run:
+          command: |
+            cd backend
+            npm test domain.test.js
+
   integrationFrontend:
     machine: true
-    steps: 
-      - run:       
-            command: |
-                    git clone https://github.com/mathernn/backend.git
-                    git clone https://github.com/mathernn/frontend.git
-      -  run:
-            command: | 
-                    cd frontend
-                    npm install
-                    npm run build
-      -  run: 
-            command: |
-                    cd backend
-                    mkdir public
-                    cp  -rT frontend/build ./public
-                    
+    steps:
+      - run:
+          command: git clone https://github.com/mathernn/backend.git
+      
+      - run:
+          command: git clone https://github.com/mathernn/frontend.git
 
+      - run:
+          command: |
+            cd frontend
+            npm install
 
+      - run:
+          command: |
+            cd frontend
+            npm run build
 
+      - run:
+          command: |
+            cd frontend
+            ls -l build
 
+      - run:
+          command: |
+            cd backend
+            mkdir -p public
+
+      - run:
+          command: |
+            cd backend
+            cp -rT frontend/build ./public || echo "Le dossier 'build' n'existe pas"
+
+      - persist_to_workspace:
+          root: backend
+          paths:
+            - public
 
 workflows:
-  build: 
-    jobs: 
-    - checkoutEtTests
-    - integrationFrontend
+  build:
+    jobs:
+      - checkoutEtTests
+      - integrationFrontend:
+          requires:
+            - checkoutEtTests
