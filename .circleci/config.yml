@@ -33,16 +33,10 @@ jobs:
           command: |
             cd frontend
             npm run build
-
-      - run:
-          command: |
-            cd frontend
-            ls -l build
-
       - run:
           command: |
             cd backend
-            mkdir -p public
+            mkdir public
 
       - run:
           command: |
