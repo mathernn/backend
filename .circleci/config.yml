@@ -58,8 +58,12 @@ jobs:
     machine: true
     steps:
       - attach_workspace:
-          at: /workspace/backend
-      - run: ls -Rl 
+          at: /workspace
+
+      - run:
+          command: |
+            cd /workspace/backend
+            ls -Rl
 
 workflows:
   build:
