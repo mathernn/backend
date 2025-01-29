@@ -58,7 +58,7 @@ jobs:
     machine: true
     steps:
       - attach_workspace:
-          at: .
+          at: /workspace/backend
       - run: ls -Rl 
 
 workflows:
