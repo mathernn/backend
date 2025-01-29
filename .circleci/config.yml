@@ -14,9 +14,31 @@ jobs:
             command: |
                     cd backend
                     npm test domain.test.js
+  integrationFrontend:
+    machine: true
+    steps: 
+      - run:       
+            command: |
+                    git clone https://github.com/mathernn/backend.git
+                    git clone https://github.com/mathernn/frontend.git
+      -  run:
+            command: | 
+                    cd frontend
+                    npm install
+                    npm build
+      -  run: 
+            command: |
+                    cd backend
+                    mkdir public
+                    cp /frontend/build ./public
+                    
+
+
+
 
 
 workflows:
   build: 
     jobs: 
     - checkoutEtTests
+    - integrationFrontend
