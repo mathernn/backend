@@ -41,7 +41,7 @@ jobs:
       - run:
           command: |
             cd backend
-            cp -rT frontend/build ./public
+            cp -rT ../frontend/build ./public
 
       - persist_to_workspace:
           root: backend
