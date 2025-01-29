@@ -6,8 +6,7 @@ jobs:
   checkoutEtTests:
     machine: true
     steps:
-      - run:
-          command: git clone https://github.com/mathernn/backend.git
+      - run: git clone https://github.com/mathernn/backend.git
       - run:
           command: |
             cd backend
@@ -20,15 +19,12 @@ jobs:
   integrationFrontend:
     machine: true
     steps:
-      - run:
-          command: git clone https://github.com/mathernn/backend.git
-      - run:
-          command: git clone https://github.com/mathernn/frontend.git
+      - run: git clone https://github.com/mathernn/backend.git
+      - run: git clone https://github.com/mathernn/frontend.git
       - run:
           command: |
             cd frontend
             npm install
-
       - run:
           command: |
             cd frontend
