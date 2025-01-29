@@ -22,10 +22,8 @@ jobs:
     steps:
       - run:
           command: git clone https://github.com/mathernn/backend.git
-      
       - run:
           command: git clone https://github.com/mathernn/frontend.git
-
       - run:
           command: |
             cd frontend
@@ -49,12 +47,19 @@ jobs:
       - run:
           command: |
             cd backend
-            cp -rT frontend/build ./public || echo "Le dossier 'build' n'existe pas"
+            cp -rT frontend/build ./public
 
       - persist_to_workspace:
           root: backend
           paths:
             - public
+
+  deploiement:
+    machine: true
+    steps:
+      - attach_workspace:
+          at: .
+      - run: ls -Rl 
 
 workflows:
   build:
@@ -63,3 +68,6 @@ workflows:
       - integrationFrontend:
           requires:
             - checkoutEtTests
+      - deploiement:
+          requires:
+            - integrationFrontend
