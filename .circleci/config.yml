@@ -56,7 +56,7 @@ jobs:
 
       - run:
           command: |
-            cd /backend
+            cd backend
             ls -Rl
 
 workflows:
