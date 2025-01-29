@@ -26,12 +26,11 @@ jobs:
                     cd frontend
                     npm install
                     npm run build
-                    $PATH
       -  run: 
             command: |
                     cd backend
                     mkdir public
-                    cp  -rT /frontend/build ./public
+                    cp  -rT frontend/build ./public
                     
 
 
