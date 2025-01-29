@@ -3,14 +3,16 @@ orbs:
   node: circleci/node@5
 jobs:
   checkoutEtTests:
-    run:
-      command:
-        git clone git@github.com:mathernn/backend.git
-        ls -l
-
+    machine: true
+    steps:
+      - run: 
+          command: |
+            git clone git@github.com:mathernn/backend.git
+            cd backend
+            npm install 
 
 
 workflows:
-  build-and-test:
-    jobs:
-      - checkoutEtTests
+  build: 
+    jobs: 
+    - checkoutEtTests
