@@ -5,11 +5,15 @@ jobs:
   checkoutEtTests:
     machine: true
     steps:
+      - run: git clone https://github.com/mathernn/backend.git
+      - run:       
+            command: |
+                    cd backend
+                    npm install 
       - run: 
-          command: |
-            git clone https://github.com/mathernn/backend.git
-            cd backend
-            npm install 
+            command: |
+                    cd backend
+                    npm test domain.test.js
 
 
 workflows:
