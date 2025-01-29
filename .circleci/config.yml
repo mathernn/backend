@@ -31,7 +31,7 @@ jobs:
             command: |
                     cd backend
                     mkdir public
-                    cp /frontend/build ./public
+                    cp  -rT /frontend/build ./public
                     
 
 
